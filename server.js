@@ -14,7 +14,9 @@ app.use(bodyParser.json())
 
 const whitelist = [
   'http://localhost:4200',
-  'http://128.92.141.42:4200',
+  'http://128.92.141.42:4200', // jiong
+  'http://206.180.248.60:4200', // siro
+  'http://73.170.241.130:4200', // toan
   'https://great-flea-market.herokuapp.com',
   'https://client-angular-jiongwu.herokuapp.com'
 ]

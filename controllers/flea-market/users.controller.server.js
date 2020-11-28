@@ -24,6 +24,7 @@ const login = (req, res) => {
 
 const currentUser = (req, res) => {
   const currentUser = req.session["currentUser"]
+  console.log(JSON.stringify(currentUser))
   if (currentUser)
     res.json(currentUser)
   else

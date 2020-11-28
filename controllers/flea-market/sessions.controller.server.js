@@ -38,10 +38,10 @@ module.exports = (app) => {
     secret: 'any string',
     // proxy : true,
     cookie: {
-      maxAge: 60000,
+      maxAge: 600000,
       httpOnly: false,
       // 2nd change.
-      secure: !isDevMode,
+      secure: false,
     },
   }));
   app.get('/api/session/set/:name/:value', setSession);

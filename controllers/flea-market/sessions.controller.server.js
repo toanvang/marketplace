@@ -25,13 +25,22 @@ const resetSession = (req, res) => {
 }
 
 module.exports = (app) => {
-  app.set('trust proxy', 1)
+  const isDevMode = process.env.NODE_ENV === 'development';
+  console.log('isDevMode :' + isDevMode)
+  // 1st change.
+  if (!isDevMode) {
+    app.set('trust proxy', 1);
+  }
   app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     secret: 'any string',
-    cookie: { secure: true }
+    cookie: {
+      maxAge: 60000,
+      // 2nd change.
+      secure: isDevMode,
+    },
   }));
   app.get('/api/session/set/:name/:value', setSession);
   app.get('/api/session/get/:name', getSession);

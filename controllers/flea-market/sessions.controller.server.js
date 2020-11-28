@@ -25,7 +25,7 @@ const resetSession = (req, res) => {
 }
 
 module.exports = (app) => {
-  const isDevMode = process.env.NODE_ENV === 'development';
+  const isDevMode = true //process.env.NODE_ENV === 'development';
   console.log('isDevMode :' + isDevMode)
   // 1st change.
   if (!isDevMode) {
@@ -39,7 +39,7 @@ module.exports = (app) => {
     cookie: {
       maxAge: 60000,
       // 2nd change.
-      secure: isDevMode,
+      secure: !isDevMode,
     },
   }));
   app.get('/api/session/set/:name/:value', setSession);

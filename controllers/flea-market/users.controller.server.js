@@ -29,7 +29,7 @@ const login = (req, res) => {
 
 const currentUser = (req, res) => {
   console.log("currentUser cookie:" + JSON.stringify(req.headers.cookie))
-  console.log("currentUser :" + req.sessionID + " " + JSON.stringify(req.session))
+  console.log("currentUser sesionId:" + req.sessionID + " " + JSON.stringify(req.session))
   const currentUser = req.session["currentUser"]
   console.log("currentUser: " + JSON.stringify(currentUser))
   if (currentUser)

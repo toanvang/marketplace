@@ -43,5 +43,6 @@ require('./controllers/questions.controller.server')(app)
 require('./controllers/quiz-attempts.controller.server')(app)
 require('./controllers/flea-market/sessions.controller.server')(app)
 require('./controllers/flea-market/users.controller.server')(app)
+require('./controllers/flea-market/products.controller.server')(app)
 
 app.listen(process.env.PORT || 8080);

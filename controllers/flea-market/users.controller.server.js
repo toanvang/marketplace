@@ -13,9 +13,9 @@ const login = (req, res) => {
   const password = req.body.password;
   usersDao.findUserByCredentials(username, password)
     .then(user => {
-      if(user) {
-        req.session['currentUser'] = user
-        res.send(user)
+      if(user.length) {
+        req.session['currentUser'] = user[0]
+        res.send(user[0])
       } else {
         res.sendStatus(403)
       }
@@ -23,12 +23,16 @@ const login = (req, res) => {
 }
 
 const currentUser = (req, res) => {
-  res.json(req.session["currentUser"])
+  const currentUser = req.session["currentUser"]
+  if (currentUser)
+    res.json(currentUser)
+  else
+    res.sendStatus(404)
 }
 
 const logout = (req, res) => {
   req.session.destroy()
-  res.send(200)
+  res.sendStatus(200)
 }
 
 module.exports = (app) => {

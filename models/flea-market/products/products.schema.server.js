@@ -7,6 +7,6 @@ const productsSchema = mongoose.Schema({
   address: String,
   owner: {type: mongoose.Schema.Types.ObjectId, ref: 'UsersModel'},
   images: [{ data: Buffer, contentType: String }],
-  location: {type: Map, of: String},
+  location: {type: Map, of: Number},
 }, {collection: 'products'})
 module.exports = productsSchema

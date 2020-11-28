@@ -1,4 +1,6 @@
 const session = require('express-session')
+const mongoose = require('mongoose')
+const MongoStore = require('connect-mongo')(session)
 
 const setSession = (req, res) => {
   const name = req.params['name'];
@@ -24,6 +26,7 @@ const resetSession = (req, res) => {
 
 module.exports = (app) => {
   app.use(session({
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
     resave: false,
     saveUninitialized: true,
     secret: 'any string'

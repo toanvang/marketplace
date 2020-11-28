@@ -1,4 +1,5 @@
 const usersDao = require('../../daos/flea-market/users.dao.server')
+
 const register = (req, res) => {
   const newUser = req.body;
   usersDao.createUser(newUser)

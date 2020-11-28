@@ -28,7 +28,7 @@ module.exports = (app) => {
   app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     secret: 'any string'
   }));
   app.get('/api/session/set/:name/:value', setSession);

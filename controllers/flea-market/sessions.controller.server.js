@@ -25,10 +25,11 @@ const resetSession = (req, res) => {
 }
 
 module.exports = (app) => {
+  app.set('trust proxy', 1)
   app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     secret: 'any string'
   }));
   app.get('/api/session/set/:name/:value', setSession);

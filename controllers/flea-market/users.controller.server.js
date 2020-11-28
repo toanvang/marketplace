@@ -4,7 +4,7 @@ const register = (req, res) => {
   const newUser = req.body;
   usersDao.createUser(newUser)
     .then(actualUser => {
-      req.session['currentUser'] = actualUser
+      req.session["currentUser"] = actualUser
       res.json(actualUser)
     })
 }
@@ -16,7 +16,7 @@ const login = (req, res) => {
     .then(user => {
       if(user.length) {
         console.log("login :" + JSON.stringify(user))
-        req.session['currentUser'] = user[0]
+        req.session["currentUser"] = user[0]
         res.send(user[0])
       } else {
         res.sendStatus(403)

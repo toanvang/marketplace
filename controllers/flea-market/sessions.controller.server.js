@@ -30,7 +30,8 @@ module.exports = (app) => {
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     resave: false,
     saveUninitialized: true,
-    secret: 'any string'
+    secret: 'any string',
+    cookie: { secure: true }
   }));
   app.get('/api/session/set/:name/:value', setSession);
   app.get('/api/session/get/:name', getSession);

@@ -36,12 +36,14 @@ module.exports = (app) => {
     resave: false,
     saveUninitialized: false,
     secret: 'any string',
-    // proxy : true,
+    key : 'sid',
+    proxy : !isDevMode, // add this when behind a reverse proxy, if you need secure cookies
     cookie: {
+      sameSite: false,
       maxAge: 600000,
       httpOnly: false,
       // 2nd change.
-      secure: false,
+      secure: !isDevMode,
     },
   }));
   app.get('/api/session/set/:name/:value', setSession);

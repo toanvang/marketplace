@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express();
@@ -12,7 +11,6 @@ mongoose.connect("mongodb+srv://tensai:mongoDB@cluster0.h1cav.mongodb.net/CS5610
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(cookieParser())
 
 const whitelist = [
   'http://localhost:4200',

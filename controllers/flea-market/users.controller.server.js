@@ -14,6 +14,7 @@ const login = (req, res) => {
   usersDao.findUserByCredentials(username, password)
     .then(user => {
       if(user.length) {
+        console.log(JSON.stringify(user))
         req.session['currentUser'] = user[0]
         res.send(user[0])
       } else {

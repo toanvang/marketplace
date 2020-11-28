@@ -38,6 +38,7 @@ module.exports = (app) => {
     secret: 'any string',
     cookie: {
       maxAge: 60000,
+      httpOnly: false,
       // 2nd change.
       secure: !isDevMode,
     },

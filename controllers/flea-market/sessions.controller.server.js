@@ -36,6 +36,7 @@ module.exports = (app) => {
     resave: false,
     saveUninitialized: false,
     secret: 'any string',
+    // proxy : true,
     cookie: {
       maxAge: 60000,
       httpOnly: false,

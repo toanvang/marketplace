@@ -17,7 +17,7 @@ const login = (req, res) => {
       if(user.length) {
         console.log("login :" + JSON.stringify(user))
         req.session["currentUser"] = user[0]
-        console.log("login :" + JSON.stringify(req.session))
+        console.log("login :" + req.sessionID + " " + JSON.stringify(req.session))
         res.send(user[0])
       } else {
         res.sendStatus(403)
@@ -26,7 +26,7 @@ const login = (req, res) => {
 }
 
 const currentUser = (req, res) => {
-  console.log("currentUser :" + JSON.stringify(req.session))
+  console.log("currentUser :" + req.sessionID + " " + JSON.stringify(req.session))
   const currentUser = req.session["currentUser"]
   console.log("currentUser: " + JSON.stringify(currentUser))
   if (currentUser)

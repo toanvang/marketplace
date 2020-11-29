@@ -16,7 +16,10 @@ const findAllProducts = (req, res) =>
 const searchProducts = (req, res) => {
   const searchConditions = req.body
   console.log("searchProducts" + JSON.stringify(searchConditions))
-  productsDao.searchProducts(searchConditions).then(products => res.json(products))
+  productsDao.searchProducts(searchConditions).then(products => {
+    console.log("searchProducts products: " + JSON.stringify(products))
+    res.json(products)
+  })
 }
 
 const updateProduct = (req, res) => {

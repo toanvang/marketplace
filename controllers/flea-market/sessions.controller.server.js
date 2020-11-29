@@ -39,7 +39,7 @@ module.exports = (app) => {
     key : 'sid',
     proxy : !isDevMode, // add this when behind a reverse proxy, if you need secure cookies
     cookie: {
-      sameSite: false,
+      sameSite: isDevMode ? false : 'none',
       maxAge: 600000,
       httpOnly: false,
       // 2nd change.

@@ -19,8 +19,21 @@ const searchProducts = (req, res) => {
   productsDao.searchProducts(searchConditions).then(products => res.json(products))
 }
 
+const updateProduct = (req, res) => {
+  const pid = req.params.pid
+  const product = req.body;
+  productsDao.updateProduct(pid, product).then(status => res.sendStatus(200))
+}
+
+const deleteProduct = (req, res) => {
+  const pid = req.params.pid
+  productsDao.deleteProduct(pid).then(status => res.sendStatus(200))
+}
+
 module.exports = (app) => {
   app.post('/api/products', createProduct)
   app.get('/api/products', findAllProducts)
   app.post('/api/products/search', searchProducts)
+  app.put('/api/products/:pid', updateProduct)
+  app.delete('/api/products/:pid', deleteProduct)
 }

@@ -14,6 +14,7 @@ app.use(bodyParser.json())
 
 const whitelist = [
   'http://localhost:4200',
+  'http://128.92.141.42',
   'http://128.92.141.42:4200', // jiong
   'http://206.180.248.60:4200', // siro
   'http://73.170.241.130:4200', // toan
@@ -23,7 +24,7 @@ const whitelist = [
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))

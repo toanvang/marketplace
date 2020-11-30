@@ -35,6 +35,14 @@ const findAllProducts = (req, res) =>
     res.json(products)
   })
 
+const findProductById = (req, res) => {
+  const pid = req.params.pid
+  productsDao.findProductById(pid).then(product => {
+    // console.log("findAllProducts: " + JSON.stringify(products))
+    res.json(product)
+  })
+}
+
 const searchProducts = (req, res) => {
   const searchConditions = req.body
   // console.log("searchProducts" + JSON.stringify(searchConditions))
@@ -58,6 +66,7 @@ const deleteProduct = (req, res) => {
 module.exports = (app) => {
   app.post('/api/products', upload.single('image'), createProduct)
   app.get('/api/products', findAllProducts)
+  app.get('/api/products/:pid', findProductById)
   app.post('/api/products/search', searchProducts)
   app.put('/api/products/:pid', updateProduct)
   app.delete('/api/products/:pid', deleteProduct)

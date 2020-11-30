@@ -19,7 +19,6 @@ const createProduct = (req, res) => {
   // console.log(JSON.stringify(req.file))
   // console.log(path.join(__dirname + '/../../uploads/' + req.file.filename))
   const newProduct = req.body;
-  console.log("createProduct: " + JSON.stringify(newProduct))
   newProduct.location = JSON.parse(newProduct.location)
   newProduct.images = [{
     data: fs.readFileSync(path.join(__dirname + '/../../uploads/' + req.file.filename), {encoding: 'base64'}),
@@ -29,17 +28,33 @@ const createProduct = (req, res) => {
     .then(actualProduct => res.json(actualProduct))
 }
 
+const updateProduct = (req, res) => {
+  const pid = req.params.pid
+  const product = req.body;
+  productsDao.updateProduct(pid, product).then(status => res.sendStatus(200))
+}
+
 const findAllProducts = (req, res) =>
   productsDao.findAllProducts().then(products => {
     // console.log("findAllProducts: " + JSON.stringify(products))
-    res.json(products)
+    let results = products.map(product => {
+      return {
+        ...product.toJSON(),
+          image: product.images[0].data.toString('base64')
+      }
+    })
+    res.json(results)
   })
 
 const findProductById = (req, res) => {
   const pid = req.params.pid
   productsDao.findProductById(pid).then(product => {
     // console.log("findAllProducts: " + JSON.stringify(products))
-    res.json(product)
+    let result = {
+      ...product.toJSON(),
+      image: product.images[0].data.toString('base64')
+    }
+    res.json(result)
   })
 }
 
@@ -52,18 +67,17 @@ const searchProducts = (req, res) => {
   })
 }
 
-const updateProduct = (req, res) => {
-  const pid = req.params.pid
-  const product = req.body;
-  productsDao.updateProduct(pid, product).then(status => res.sendStatus(200))
-}
-
 const deleteProduct = (req, res) => {
   const pid = req.params.pid
   productsDao.deleteProduct(pid).then(status => res.sendStatus(200))
 }
 
 module.exports = (app) => {
+  // productsDao.findProductById('5fc45a4d3c158037fd843d89').then(product => {
+  //   console.log(product.images[0].data.toString('base64').slice(0, 10))
+  //   // console.log(product.images[0].data.toJSON())
+  //   return fs.writeFileSync(path.join(__dirname + '/../../uploads/test.img'), product.images[0].data)
+  // })
   app.post('/api/products', upload.single('image'), createProduct)
   app.get('/api/products', findAllProducts)
   app.get('/api/products/:pid', findProductById)

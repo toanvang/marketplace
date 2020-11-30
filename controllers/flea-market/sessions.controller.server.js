@@ -26,7 +26,7 @@ const resetSession = (req, res) => {
 
 module.exports = (app) => {
   const isDevMode = process.env.NODE_ENV === 'development';
-  console.log('isDevMode :' + isDevMode)
+  console.log('isDevMode: ' + isDevMode)
   // 1st change.
   if (!isDevMode) {
     app.set('trust proxy', 1);
@@ -40,7 +40,7 @@ module.exports = (app) => {
     proxy : !isDevMode, // add this when behind a reverse proxy, if you need secure cookies
     cookie: {
       sameSite: isDevMode ? false : 'none',
-      maxAge: 600000,
+      maxAge: 6000000,
       httpOnly: false,
       // 2nd change.
       secure: !isDevMode,

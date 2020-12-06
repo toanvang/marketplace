@@ -33,9 +33,20 @@ const updateUser = (req, res) => {
   usersDao.updateUser(uid, user).then(status => res.sendStatus(200))
 }
 
+const findUserById = (req, res) => {
+  const uid = req.params.uid
+  usersDao.findUserById(uid).then(user => {
+q    // only return insensitive information
+    user.password = undefined
+    user.phone = undefined
+    user.email = undefined
+    res.json(user)
+  })
+}
+
 const currentUser = (req, res) => {
   console.log("currentUser cookie:" + JSON.stringify(req.headers.cookie))
-  console.log("currentUser sesionId:" + req.sessionID + " " + JSON.stringify(req.session))
+  console.log("currentUser sessionId:" + req.sessionID + " " + JSON.stringify(req.session))
   const currentUser = req.session["currentUser"]
   console.log("currentUser: " + JSON.stringify(currentUser))
   if (currentUser)
@@ -54,5 +65,6 @@ module.exports = (app) => {
   app.post('/api/register', register)
   app.post('/api/currentUser', currentUser)
   app.put('/api/updateUser/:uid', updateUser)
+  app.get('/api/user/:uid', findUserById)
   app.post('/api/logout', logout)
 }

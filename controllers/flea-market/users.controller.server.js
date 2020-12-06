@@ -27,6 +27,12 @@ const login = (req, res) => {
     })
 }
 
+const updateUser = (req, res) => {
+  const uid = req.params.uid
+  const user = req.body;
+  usersDao.updateUser(uid, user).then(status => res.sendStatus(200))
+}
+
 const currentUser = (req, res) => {
   console.log("currentUser cookie:" + JSON.stringify(req.headers.cookie))
   console.log("currentUser sesionId:" + req.sessionID + " " + JSON.stringify(req.session))
@@ -47,5 +53,6 @@ module.exports = (app) => {
   app.post('/api/login', login)
   app.post('/api/register', register)
   app.post('/api/currentUser', currentUser)
+  app.put('/api/updateUser/:uid', updateUser)
   app.post('/api/logout', logout)
 }

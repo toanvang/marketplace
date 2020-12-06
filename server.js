@@ -19,16 +19,18 @@ const whitelist = [
   'http://206.180.248.60:4200', // siro
   'http://73.170.241.130:4200', // toan
   'https://great-flea-market.herokuapp.com',
+  'http://great-flea-market.herokuapp.com',
   'https://client-angular-jiongwu.herokuapp.com'
 ]
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
+    callback(null, true)
+    // if (!origin || whitelist.indexOf(origin) !== -1) {
+    //   callback(null, true)
+    // } else {
+    //   callback(new Error('Not allowed by CORS'))
+    // }
   },
   credentials: true
 }

@@ -36,7 +36,7 @@ const updateUser = (req, res) => {
 const findUserById = (req, res) => {
   const uid = req.params.uid
   usersDao.findUserById(uid).then(user => {
-q    // only return insensitive information
+    // only return insensitive information
     user.password = undefined
     user.phone = undefined
     user.email = undefined

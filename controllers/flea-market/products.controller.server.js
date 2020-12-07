@@ -21,7 +21,7 @@ const createProduct = (req, res) => {
   const newProduct = req.body;
   newProduct.location = JSON.parse(newProduct.location)
   newProduct.images = [{
-    data: fs.readFileSync(path.join(__dirname + '/../../uploads/' + req.file.filename), {encoding: 'base64'}),
+    data: fs.readFileSync(path.join(__dirname + '/../../uploads/' + req.file.filename)),
     contentType: 'image/png'
   }]
   productsDao.createProduct(newProduct)
@@ -78,6 +78,12 @@ module.exports = (app) => {
   //   // console.log(product.images[0].data.toJSON())
   //   return fs.writeFileSync(path.join(__dirname + '/../../uploads/test.img'), product.images[0].data)
   // })
+  try {
+    fs.mkdirSync(path.join(__dirname, '/../../uploads/'))
+  } catch (err) {
+    if (err.code !== 'EEXIST') throw err
+  }
+
   app.post('/api/products', upload.single('image'), createProduct)
   app.get('/api/products', findAllProducts)
   app.get('/api/products/:pid', findProductById)

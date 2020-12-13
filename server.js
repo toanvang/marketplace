@@ -4,8 +4,10 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express();
 
-mongoose.connect("mongodb+srv://tensai:mongoDB@cluster0.h1cav.mongodb.net/CS5610",
-  {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect("mongodb+srv://tensai:mongoDB@cluster0.h1cav.mongodb.net/CS5610", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false})
   .then(console.log('connection ok'))
   .catch(err => console.log(`DB Connection Error: ${err.message}`));
 
@@ -51,5 +53,6 @@ require('./controllers/quiz-attempts.controller.server')(app)
 require('./controllers/flea-market/sessions.controller.server')(app)
 require('./controllers/flea-market/users.controller.server')(app)
 require('./controllers/flea-market/products.controller.server')(app)
+require('./controllers/flea-market/remarks.controller.server')(app)
 
 app.listen(process.env.PORT || 8080);

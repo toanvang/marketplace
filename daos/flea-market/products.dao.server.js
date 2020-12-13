@@ -11,7 +11,7 @@ const findProductById = (pid) =>
 const searchProducts = (searchConditions) =>
   productModel.find(searchConditions).populate('owner', 'username _id')
 
-const updateProduct = (pid, product) => productModel.findByIdAndUpdate({pid}, product)
+const updateProduct = (pid, product) => productModel.findByIdAndUpdate(pid, product)
 const deleteProduct = (pid) => productModel.deleteOne({_id: pid})
 
 module.exports = {createProduct, findAllProducts, findProductById, searchProducts, updateProduct, deleteProduct}

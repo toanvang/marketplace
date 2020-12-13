@@ -6,7 +6,7 @@ const findAllProducts = () =>
   productModel.find().populate('owner', 'username _id')
 
 const findProductById = (pid) =>
-  productModel.findById(pid)
+  productModel.findById(pid).populate('owner', 'username _id')
 
 const searchProducts = (searchConditions) =>
   productModel.find(searchConditions).populate('owner', 'username _id')

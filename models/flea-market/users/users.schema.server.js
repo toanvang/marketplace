@@ -7,5 +7,6 @@ const usersSchema = mongoose.Schema({
   role: String,
   address: String,
   dob: Date,
+  following: [String]
 }, {collection: 'users'})
 module.exports = usersSchema

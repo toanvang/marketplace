@@ -35,20 +35,22 @@ const updateUser = (req, res) => {
 
 const findUserById = (req, res) => {
   const uid = req.params.uid
+  const currentUser = req.session["currentUser"]
   usersDao.findUserById(uid).then(user => {
     // only return insensitive information
-    user.password = undefined
-    user.phone = undefined
-    user.email = undefined
+    console.log("findUserById: " + JSON.string(user))
+    if (currentUser._id != uid) {
+      user.password = undefined
+    }
     res.json(user)
   })
 }
 
 const currentUser = (req, res) => {
-  console.log("currentUser cookie:" + JSON.stringify(req.headers.cookie))
-  console.log("currentUser sessionId:" + req.sessionID + " " + JSON.stringify(req.session))
+  // console.log("currentUser cookie:" + JSON.stringify(req.headers.cookie))
+  // console.log("currentUser sessionId:" + req.sessionID + " " + JSON.stringify(req.session))
   const currentUser = req.session["currentUser"]
-  console.log("currentUser: " + JSON.stringify(currentUser))
+  // console.log("currentUser: " + JSON.stringify(currentUser))
   if (currentUser)
     res.json(currentUser)
   else

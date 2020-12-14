@@ -8,7 +8,8 @@ const productsSchema = mongoose.Schema({
   owner: {type: mongoose.Schema.Types.ObjectId, ref: 'UsersModel'},
   images: [{ data: Buffer, contentType: String }],
   location: {type: Map, of: Number},
-  status: {type: String}
+  status: {type: String},
+  boughtBy: {type: String}
 
 }, {collection: 'products'})
 module.exports = productsSchema

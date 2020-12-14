@@ -39,7 +39,7 @@ const findUserById = (req, res) => {
   usersDao.findUserById(uid).then(user => {
     // only return insensitive information
     console.log("findUserById: " + JSON.stringify(user))
-    if (currentUser._id != uid) {
+    if (!currentUser || currentUser._id != uid) {
       user.password = undefined
     }
     res.json(user)
